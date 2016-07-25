@@ -30,7 +30,7 @@ struct UserToolchain: Toolchain {
     }
 
     var platformArgsSwiftc: [String] {
-        return ["-target", "x86_64-apple-macosx10.10", "-sdk", sysroot!]
+        return ["-target", "x86_64-apple-ios10.0", "-sdk", sysroot!]
     }
 #else
     let platformArgsClang: [String] = []
@@ -46,7 +46,7 @@ struct UserToolchain: Toolchain {
             clang = try getenv("CC") ?? POSIX.popen(whichClangArgs).chomp()
 
             #if os(OSX)
-                sysroot = try getenv("SYSROOT") ?? POSIX.popen(["xcrun", "--sdk", "macosx", "--show-sdk-path"]).chomp()
+                sysroot = try getenv("SYSROOT") ?? POSIX.popen(["xcrun", "--sdk", "iphonesimulator", "--show-sdk-path"]).chomp()
             #else
                 sysroot = nil
             #endif
